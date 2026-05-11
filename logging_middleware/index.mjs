@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from 'axios';
 
 let authToken = null;
 
@@ -18,7 +18,8 @@ async function Log(stack, level, pkg, message) {
             return;
         }
 
-        await axios.post('http://4.224.186.213/evaluation-service/logs', {
+        // Use relative URL so Vite proxy handles CORS in dev
+        await axios.post('/evaluation-service/logs', {
             stack,
             level,
             package: pkg,
@@ -35,4 +36,4 @@ async function Log(stack, level, pkg, message) {
 }
 
 Log.setLogToken = setLogToken;
-module.exports = Log;
+export default Log;
